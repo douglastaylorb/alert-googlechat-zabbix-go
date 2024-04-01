@@ -68,7 +68,13 @@ Nome do problema: {EVENT.NAME}
 Duração: {EVENT.DURATION}
 
 Exemplo de como irá ficar a notificação de problema:
+
+<br>
+
 ![image](https://github.com/douglastaylorb/alert-googlechat-zabbix-go/assets/78963489/421ebcd8-4d43-4817-abf4-076e7dea75ef)
 
 Exemplo de como irá ficar a notificação de solução:
+
+<br>
+
 ![image](https://github.com/douglastaylorb/alert-googlechat-zabbix-go/assets/78963489/df16b621-2fcf-47bb-bafa-71e2828fa524)
