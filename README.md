@@ -1,3 +1,89 @@
+### HOW TO USE
+
+Download the "alert" file and save it in the following path on the zabbix server: /usr/lib/zabbix/alertscripts. <br>
+
+After saving the file locally, it's necessary to set the permissions so that zabbix can run, use this command: chmod +x /usr/lib/zabbix/alertscripts/alarm
+
+##
+
+### Zabbix alert configuration example:
+
+Create the user: 'api.google.chat' with the following settings:
+
+- Add to the group “No access to the frontend”;
+- Add administrator rules to be able to receive notification from all hosts;
+- Configure the media with the following information:
+   - Type: Google Chat Go Prod
+   - Send to: (google chat space webhook link)
+   - When Active: 1-7,00:00-24:00
+   - Use if severity: Average, High, Disaster (Or whatever severities you prefer)
+
+<br>
+
+### MEDIA TYPE:
+
+Create a Media Type to run the script when an alert is created. The defined settings:
+
+- Name: Google Chat Notification
+- Type: script
+- Script Name: alert
+- Script parameters: {ALERT.SENDTO}
+{ALERT.MESSAGE}
+
+<br>
+
+### ACTIONS:
+
+Create the trigger action with settings:
+
+Action Tab:
+- Name: Google Chat Notification
+- Type of calculation: And/Or
+- Conditions: Trigger severity is greater than or equals Warning
+
+Host group equals "DESIRED_HOST_GROUP_NAME" (This way, only notifications from hosts that are part of the defined group will be sent)
+
+Operations Tab:
+
+- Default operation step duration: 1h
+- Operations:
+- Send to users: api.google.chat
+- Send only to: Google Chat Notification
+- Subject: ❌ Host Problem: {HOST.NAME}
+- Message: ❌ Host Problem: {HOST.NAME}
+
+The problem started at: {EVENT.TIME} on date: {EVENT.DATE}
+Problem name: {EVENT.NAME}
+Severity: {EVENT.SEVERITY}
+Host IP: {HOST.IP}
+Host description: {HOST.DESCRIPTION}
+
+- Recovery Operations:
+- Operation: Notify everyone involved
+- Subject: ✅ Resolved: {HOST.NAME}
+- Message: ✅ Resolved: {HOST.NAME}
+
+The problem was resolved at: {EVENT.RECOVERY.TIME} on date: {EVENT.RECOVERY.DATE}
+Problem name: {EVENT.NAME}
+Duration: {EVENT.DURATION}
+
+Problem notification example:
+
+<br>
+
+![image](https://github.com/douglastaylorb/alert-googlechat-zabbix-go/assets/78963489/421ebcd8-4d43-4817-abf4-076e7dea75ef)
+
+
+Solution notification example:
+
+<br>
+
+![image](https://github.com/douglastaylorb/alert-googlechat-zabbix-go/assets/78963489/df16b621-2fcf-47bb-bafa-71e2828fa524)
+
+##
+
+##
+
 ### COMO UTILIZAR
 
 Baixar o arquivo "alert" e salvar no seguinte caminho do servidor zabbix: /usr/lib/zabbix/alertscripts. <br>
@@ -5,6 +91,7 @@ Baixar o arquivo "alert" e salvar no seguinte caminho do servidor zabbix: /usr/l
 Após salvar o arquivo no local, é necessário definir as permissões para que o zabbix possa executar, segue exemplo: chmod +x /usr/lib/zabbix/alertscripts/alarm
 
 ##
+
 
 ### Exemplo de configuração de alertas zabbix:
 
